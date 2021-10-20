@@ -288,21 +288,7 @@ const DeleteProduct = async (req, res) =>{
         UPDATE products SET deleted = true WHERE id = ${id}    
     `
     try {
-        await database.query(query_text, [])
-        // const directory = path.join(__dirname, `../uploads/${id}`)
-        // fs.readdir(directory, (e, files)=>{
-        //     if(files){
-        //     for (const file of files){
-        //         fs.unlink(path.join(directory, file), err =>{
-
-        //         })
-        //         console.log("i am in for cikl")
-        //     }
-        //     fs.rmdirSync(directory)
-        //     }
-        // }
-        // )
-        
+        await database.query(query_text, [])      
         return res.status(status.success).send(true)
     } catch (e) {
         console.log(e)
@@ -398,7 +384,7 @@ const GetAllProducts = async (req, res) =>{
     }
     let WherePart = ``
     if (product_name && product_name !== 'undefined'){
-        WherePart += ` AND  p.product_name ~* '${product_name}'`
+        WherePart += ` AND  p.product_name ~* LOWER('${product_name}')`
     }
     if(producer_id && producer_id !== 'undefined'){
         WherePart += ` AND p.producer_id = ${producer_id}`

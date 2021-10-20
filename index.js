@@ -27,52 +27,18 @@ app.use(cors({
     credentials: true
 }));
 
-// app.use(cors)
+
 
 app.use(express.json());
 app.use(morgan('dev'))
-
-// app.use(helmet({
-//     contentSecurityPolicy: {
-//     directives: {
-//     ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-//     "script-src": ["'self'", "'unsafe-inline'"],
-//         },
-//     },
-// })
-// );
-
-// app.use(
-//     helmet({
-//       contentSecurityPolicy: {
-//         directives: {
-//           ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-//           "script-src": ["'self'", "'unsafe-inline'", "http://192.168.31.219:8000"],
-//         },
-//       },
-//     })
-//   );
-// app.use(
-//     helmet({
-//       contentSecurityPolicy: {
-//         directives: {
-//           defaultSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", ],
-//           scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", ],
-//           styleSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", ],
-//           imgSrc: ["*", 'data:'],
-//           connectSrc: ["'unsafe-inline'"],
-//           frameSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", ],
-//         },
-//       }
-//     })
-//   );
+  
 app.use(
     helmet({
       contentSecurityPolicy: false,
     })
   );
 
-// app.use('/static', express.static(path.join(__dirname, 'build', 'static')))
+
 app.use(express.static(path.join(__dirname, 'build')))
 app.use('/api', Routers)
 

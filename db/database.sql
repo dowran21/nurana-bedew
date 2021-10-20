@@ -52,6 +52,11 @@ CREATE TABLE products(
     CONSTRAINT producer_id_fk FOREIGN KEY (producer_id) REFERENCES producers(id)
 );
 
+CREATE INDEX ON products (LOWER(description_ru));
+CREATE INDEX ON products (LOWER(description_tm)); 
+
+
+
 CREATE TABLE product_images(
     id BIGSERIAL PRIMARY KEY NOT NULL,
     product_id SMALLINT NOT NULL,
