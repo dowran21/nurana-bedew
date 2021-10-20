@@ -384,7 +384,7 @@ const GetAllProducts = async (req, res) =>{
     }
     let WherePart = ``
     if (product_name && product_name !== 'undefined'){
-        WherePart += ` AND LOWER(p.product_name) ~* LOWER('${product_name}')`
+        WherePart += ` AND LOWER(p.product_name) ILIKE LOWER('%${product_name}%')`
     }
     if(producer_id && producer_id !== 'undefined'){
         WherePart += ` AND p.producer_id = ${producer_id}`
