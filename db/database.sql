@@ -54,6 +54,7 @@ CREATE TABLE products(
 
 CREATE INDEX ON products (LOWER(description_ru));
 CREATE INDEX ON products (LOWER(description_tm)); 
+CREATE INDEX ON products (LOWER(product_name)); 
 
 
 
