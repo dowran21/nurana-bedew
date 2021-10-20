@@ -1,0 +1,93 @@
+const PDFDocument = require('pdfkit')
+const fs = require('fs');
+// const { height } = require('pdfkit/js/page');
+const path = require('path');
+let robotoRegular = path.join(__dirname, 'Roboto-Regular.ttf');
+let arial = path.join(__dirname, 'arial.ttf')
+
+async function OrderGenerator (data){
+    const {order_id, created_date, total_price, full_name, main_phone, email, order_items} = data
+
+    let doc = new PDFDocument({ size: "A4", margins : {top: 0,bottom:30,left: 30,right: 30}});
+    doc.font(robotoRegular);
+    doc
+        .image('./nurana_bedew.png', 0, 0, { width: 150, height:150})
+        .fillColor('#000')
+        .fontSize(20)
+        .text('Sargyt', 275, 50, {align: 'right'})
+        .fontSize(10)
+        .text(`Sargyt belgisi: ${order_id}`, {align: 'right'})
+        .text(`Sargydyň güni: ${created_date}`, {align: 'right'})
+        .text(`Sargydyň jemi bahasy: ${total_price}TMT`, {align: 'right'})
+        .moveDown()
+        .text(`Sargyt ediji:\n ${full_name}\n${email}\n+993${main_phone}`, {align: 'right'})
+
+    const beginningOfPage = 50
+    const endOfPage = 550
+
+
+    doc.moveDown()
+    doc.moveDown()
+    const tableTop = 200
+    const itemCodeX = 50
+    const descriptionX = 100
+    const quantityX = 300
+    const priceX = 350
+    const amountX = 400
+
+    doc
+        .fontSize(10)
+        .text('Kody', itemCodeX, tableTop, {bold: true})
+        .text('Ady', descriptionX, tableTop)
+        .text('Sany', quantityX, tableTop)
+        .text('Bahasy', priceX, tableTop)
+        .text('Jemi', amountX, tableTop)
+
+    // const items = invoice.items
+    let i = 0
+
+
+    for (i = 0; i < order_items.length; i++) {
+        const item = order_items[i]
+        const y = tableTop + 25 + (i * 25)
+
+        doc
+            .fontSize(10).font(arial)
+            .text(item.product_id, itemCodeX, y)
+            .text(item.product_name, descriptionX, y)
+            .text(item.quantity, quantityX, y)
+            .text(`${item.product_price} TMT`, priceX, y)
+            .text(`${item.total_product_price} TMT`, amountX, y)
+    }
+
+    const pdfBuffer = await new Promise(resolve => {
+//	doc.pipe(fs.createWriteStream('some.pdf');
+        doc.end()
+        // console.log("hello")
+        doc.pipe(fs.createWriteStream("something.pdf"))
+        const buffers = []
+        doc.on("data", buffers.push.bind(buffers))
+        doc.on("end", () => {
+            const pdfData = Buffer.concat(buffers)
+            resolve(pdfData)
+        })
+    });
+    return {
+        headers: {
+            "content-type": "application/pdf",
+	    "charset":"utf-8"
+        },
+        body: pdfBuffer.toString("base64"),
+        isBase64Encoded: true,
+    }
+
+
+    
+
+    // write out file
+    theOutput.end()
+
+
+}
+
+module.exports = {OrderGenerator}
