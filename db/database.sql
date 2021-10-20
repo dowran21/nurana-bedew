@@ -55,7 +55,7 @@ CREATE TABLE products(
 CREATE INDEX ON products (LOWER(description_ru));
 CREATE INDEX ON products (LOWER(description_tm)); 
 CREATE INDEX ON products (LOWER(product_name)); 
-
+CREATE INDEX ON products (product_name::citext);
 
 
 CREATE TABLE product_images(
