@@ -31,9 +31,9 @@ async function OrderGenerator (data){
     const tableTop = 200
     const itemCodeX = 20
     const descriptionX = 60
-    const quantityX = 500
-    const priceX = 550
-    const amountX = 600
+    const quantityX = 480
+    const priceX = 520
+    const amountX = 540
 
     doc
         .fontSize(10)
@@ -54,7 +54,7 @@ async function OrderGenerator (data){
         doc
             .fontSize(10).font(arial)
             .text(item.product_id, itemCodeX, y)
-            .text(`${item.product_name.substring(0, 80)}`, descriptionX, y)
+            .text(`${item.product_name.substring(0, 70)}`, descriptionX, y)
             .text(item.quantity, quantityX, y)
             .text(`${item.product_price} TMT`, priceX, y)
             .text(`${item.total_product_price} TMT`, amountX, y)
