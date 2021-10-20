@@ -31,8 +31,8 @@ async function OrderGenerator (data){
     const tableTop = 200
     const itemCodeX = 20
     const descriptionX = 60
-    const quantityX = 460
-    const priceX = 490
+    const quantityX = 440
+    const priceX = 470
     const amountX = 520
 
     doc
