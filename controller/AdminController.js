@@ -410,7 +410,7 @@ const GetAllProducts = async (req, res) =>{
                     INNER JOIN producers prd 
                         ON prd.id = p.producer_id
                 WHERE p.deleted = false ${WherePart}
-                ORDER BY p.updated_at ASC
+                ORDER BY p.updated_at DESC
                 ${offSet}
             )pr) AS products
                 `   
