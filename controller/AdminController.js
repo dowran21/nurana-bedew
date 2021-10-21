@@ -343,21 +343,6 @@ const SendSMSNewInCome = async (req, res) =>{
 //     }
 // }
 
-// const UpdateCategory = async (req, res) =>{
-//     console.log("I am in controller of category")
-//     const {id} = req.params
-//     const {category_name} = req.body
-//     console.log(category_name)
-//     const query_text = `
-//         UPDATE categories SET category_name = $1 WHERE id = $2 
-//     `
-//     try {
-//         await database.query(query_text, [category_name, id])
-//         return res.status(status.success).send(true)
-//     } catch (e) {
-//         return res.status(status.error).send(false)
-//     }
-// }
 
 const GetProducers = async (req, res) =>{
     const query_text = `
