@@ -328,21 +328,6 @@ const SendSMSNewInCome = async (req, res) =>{
     }
 }
 
-// const GetAllCategory = async (req, res) =>{
-//     const query_text = `
-//         SELECT 
-//             (SELECT json_agg(cat) FROM 
-//                 (SELECT * FROM categories ORDER BY category_name ASC 
-//             )cat) AS categories
-//     `
-//     try {
-//         const {rows} = await database.query(query_text, [])
-//         return res.status(status.success).json({"rows":rows[0]})
-//     } catch (e) {
-//         return res.status(status.error).send("Error")
-//     }
-// }
-
 
 const GetProducers = async (req, res) =>{
     const query_text = `
