@@ -23,11 +23,11 @@ CREATE TABLE users(
     sms_sending BOOLEAN DEFAULT TRUE,
     deleted BOOLEAN DEFAULT FALSE,
     added_time TIMESTAMP WITHOUT TIME ZONE DEFAULT clock_timestamp(),
-    UNIQUE(main_phone),
 
     CONSTRAINT role_id_fk FOREIGN KEY (role_id) REFERENCES roles(id) ON UPDATE CASCADE
 );
 CREATE UNIQUE INDEX ON users(role_id) WHERE (role_id = 1);
+CREATE UNIQUE INDEX ON users(main_phone, deleted) WHERE (deleted = false);
 
 
 CREATE TABLE producers(
@@ -51,15 +51,13 @@ CREATE TABLE products(
     deleted BOOLEAN DEFAULT FALSE,
     description_tm TEXT NOT NULL,
     description_ru TEXT NOT NULL,
-    UNIQUE(product_name),
+    
 
     CONSTRAINT producer_id_fk FOREIGN KEY (producer_id) REFERENCES producers(id)
 );
 
-CREATE INDEX ON products (LOWER(description_ru));
-CREATE INDEX ON products (LOWER(description_tm)); 
-CREATE INDEX ON products (LOWER(product_name)); 
-CREATE INDEX ON products (product_name::citext);
+CREATE UNIQUE INDEX ON products(product_name, deleted) WHERE (deleted = false);
+
 
 
 CREATE TABLE product_images(
