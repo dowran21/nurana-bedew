@@ -375,6 +375,10 @@ const GetProducers = async (req, res) =>{
 }
 
 const GetAllProducts = async (req, res) =>{
+    // const capitalizeString = ([first, ...rest])=>{
+    //     return first.toLocaleUpperCase('ru') + rest.join('')
+    // };
+
     const {page, limit, product_name, producer_id} = req.query
     let offSet = ``
     if (page && limit && page !== 'undefined' && limit !== 'undefined'){
@@ -384,7 +388,7 @@ const GetAllProducts = async (req, res) =>{
     }
     let WherePart = ``
     if (product_name && product_name !== 'undefined'){
-        WherePart += ` AND LOWER(p.product_name) ILIKE LOWER('%${product_name}%')`
+        WherePart += ` AND LOWER(p.product_name) ~* LOWER('%${product_name}%')`
     }
     if(producer_id && producer_id !== 'undefined'){
         WherePart += ` AND p.producer_id = ${producer_id}`
