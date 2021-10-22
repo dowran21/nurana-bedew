@@ -203,6 +203,8 @@ const UpdateProduct = async (req, res) =>{
     const {id} = req.params
     const {product_name, producer_id, stock_count, 
         price,  quantity, date_of_expire, description_tm, description_ru } = req.body
+    console.log(product_name, producer_id, stock_count, 
+        price,  quantity, date_of_expire, description_tm, description_ru)
     let data = {}
     try{
         const {rows} = await database.query(`SELECT * FROM products WHERE id = ${id}`, [])
@@ -330,10 +332,18 @@ const SendSMSNewInCome = async (req, res) =>{
 
 
 const GetProducers = async (req, res) =>{
+    const {producer_name} = req.params
+    let WherePart = ``
+    if(producer_name && producer_name != null && producer_name != 'undefined'){
+        WherePart = ` AND producer_name ~* '${producer_name}'`
+    }
     const query_text = `
         SELECT 
             (SELECT json_agg(pr) FROM
-                (SELECT * FROM producers)pr) AS producers
+                (SELECT * 
+                FROM producers
+                    ${WherePart}
+                )pr) AS producers
     `
     try {
         const {rows} = await database.query(query_text, [])
