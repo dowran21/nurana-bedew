@@ -524,15 +524,36 @@ const CreateOrderPDF = async (req, res) =>{
 const UpdateImage = async (req, res) =>{
     const {id} = req.params
     const path = req.file.path
-    const query_text = `
-        UPDATE product_images SET destination = '${path}' WHERE product_id = ${id}
-    `
+    let image = ``
+    const query_text = `SELECT destination FROM product_images WHERE product_id = ${id}`
     try {
-        const {rows} = await database.query(query_text, [])
-        return res.status(status.success).send(true)
+        const {rows} = database.query(query_text, [])
+        image = rows[0].destination
     } catch (e) {
         console.log(e)
-        return res.status(status.error).send("Error")
+    }
+    if(!image){
+        const query_text1 = `
+            UPDATE product_images SET destination = '${path}' WHERE product_id = ${id}
+        `
+        try {
+            await database.query(query_text1, [])
+            return res.status(status.success).send(true)
+        } catch (e) {
+            console.log(e)
+            return res.status(status.error).send("Error")
+        }
+    }else{
+        const query_text1 = `
+            INSERT INTO product_images(product_id, destination) VALUES (${id}, '${path}')
+        `
+        try {
+            await database.query(query_text1, [])
+            return res.status(status.success).send(true)
+        } catch (e) {
+            console.log(e)
+            return res.status(status.error).send("Error")
+        }
     }
 }
 
