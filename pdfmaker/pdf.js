@@ -58,6 +58,7 @@ async function OrderGenerator (data){
             .text(item.quantity, quantityX, y)
             .text(`${item.product_price} TMT`, priceX, y)
             .text(`${item.total_product_price} TMT`, amountX, y)
+        doc.rect(7, y, 560, 0.2).fillColor('#000').stroke('#000')
     }
 
     const pdfBuffer = await new Promise(resolve => {
