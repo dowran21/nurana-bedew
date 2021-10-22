@@ -47,11 +47,12 @@ async function OrderGenerator (data){
     // const items = invoice.items
     let i = 0
 
+    let h = 0
 
     for (i = 0; i < order_items.length; i++) {
         const item = order_items[i]
         const y = tableTop + 25 + (i * 25)
-
+        h=y;
         doc
             .fontSize(10).font(arial)
             .text(item.product_id, itemCodeX, y)
@@ -61,7 +62,7 @@ async function OrderGenerator (data){
             .text(`${item.total_product_price} TMT`, amountX, y)
         doc.rect(7, y - 5, 560, 0.2).fillColor('#000').stroke('#000')
     }
-
+    doc.rect(7, h - 5, 560, 0.2).fillColor('#000').stroke('#000')
     const pdfBuffer = await new Promise(resolve => {
 //	doc.pipe(fs.createWriteStream('some.pdf');
         doc.end()
