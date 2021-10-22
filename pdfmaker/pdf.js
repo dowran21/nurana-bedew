@@ -42,7 +42,7 @@ async function OrderGenerator (data){
         .text('Sany', quantityX, tableTop)
         .text('Bahasy', priceX, tableTop)
         .text('Jemi', amountX, tableTop)
-    doc.rect(20, tableTop - 5, 540, 0.2).fillColor('#000').stroke('#000')
+    doc.rect(17, tableTop - 5, 540, 0.2).fillColor('#000').stroke('#000')
 
     // const items = invoice.items
     let i = 0
@@ -60,14 +60,14 @@ async function OrderGenerator (data){
             .text(item.quantity, quantityX, y)
             .text(`${item.product_price} TMT`, priceX, y)
             .text(`${item.total_product_price} TMT`, amountX, y)
-        doc.rect(20, y - 5, 540, 0.2).fillColor('#000').stroke('#000')
+        doc.rect(17, y - 5, 540, 0.2).fillColor('#000').stroke('#000')
     }
-    doc.rect(20, h + 20, 540, 0.2).fillColor('#000').stroke('#000')
-    doc.rect(itemCodeX -3, tableTop, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
-    doc.rect(descriptionX-3, tableTop, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
-    doc.rect(quantityX-3, tableTop, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
-    doc.rect(priceX-3, tableTop, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
-    doc.rect(amountX-3, tableTop, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
+    doc.rect(17, h + 20, 540, 0.2).fillColor('#000').stroke('#000')
+    doc.rect(itemCodeX -3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
+    doc.rect(descriptionX-3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
+    doc.rect(quantityX-3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
+    doc.rect(priceX-3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
+    doc.rect(amountX-3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
 
 
     const pdfBuffer = await new Promise(resolve => {
