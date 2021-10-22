@@ -62,7 +62,7 @@ async function OrderGenerator (data){
             .text(`${item.total_product_price} TMT`, amountX, y)
         doc.rect(7, y - 5, 560, 0.2).fillColor('#000').stroke('#000')
     }
-    doc.rect(7, h - 5, 560, 0.2).fillColor('#000').stroke('#000')
+    doc.rect(7, h + 20, 560, 0.2).fillColor('#000').stroke('#000')
     const pdfBuffer = await new Promise(resolve => {
 //	doc.pipe(fs.createWriteStream('some.pdf');
         doc.end()
