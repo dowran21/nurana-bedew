@@ -63,11 +63,11 @@ async function OrderGenerator (data){
         doc.rect(20, y - 5, 540, 0.2).fillColor('#000').stroke('#000')
     }
     doc.rect(20, h + 20, 540, 0.2).fillColor('#000').stroke('#000')
-    doc.rect(itemCodeX -1, tableTop*2, 0.2, (tableTop-h+40)).fillColor('#000').stroke('#000')
-    doc.rect(descriptionX-1, tableTop*2, 0.2, (tableTop-h+40)).fillColor('#000').stroke('#000')
-    doc.rect(quantityX-1, tableTop*2, 0.2, (tableTop-h+40)).fillColor('#000').stroke('#000')
-    doc.rect(priceX-1, tableTop*2, 0.2, (tableTop-h+40)).fillColor('#000').stroke('#000')
-    doc.rect(amountX-1, tableTop*2, 0.2, (tableTop-h+40)).fillColor('#000').stroke('#000')
+    doc.rect(itemCodeX -1, tableTop, 0.2, (h-tableTop+40)).fillColor('#000').stroke('#000')
+    doc.rect(descriptionX-1, tableTop, 0.2, (h-tableTop+40)).fillColor('#000').stroke('#000')
+    doc.rect(quantityX-1, tableTop, 0.2, (h-tableTop+40)).fillColor('#000').stroke('#000')
+    doc.rect(priceX-1, tableTop, 0.2, (h-tableTop+40)).fillColor('#000').stroke('#000')
+    doc.rect(amountX-1, tableTop, 0.2, (h-tableTop+40)).fillColor('#000').stroke('#000')
 
 
     const pdfBuffer = await new Promise(resolve => {
