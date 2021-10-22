@@ -17,6 +17,8 @@ router.post('/delete-user/:id', VerifyAdminAccessToken, AdminController.DeleteUs
 
 router.post('/add-product', VerifyAdminAccessToken, AdminController.AddProduct)
 router.post('/add-product-image/:id', VerifyAdminAccessToken, upload.single('picture'), resize_image, AdminController.AddProductImage)
+router.post('/update-product-image/:id', VerifyAdminAccessToken, upload.single('picture'), resize_image, AdminController.UpdateImage)
+
 // router.post('/add-category', VerifyAdminAccessToken, AdminController.AddCategory)
 router.post('/add-producer', VerifyAdminAccessToken, AdminController.AddProducer)
 router.post('/update-product/:id', VerifyAdminAccessToken, AdminController.UpdateProduct)
@@ -33,6 +35,7 @@ router.get('/get-producers', VerifyAdminAccessToken, AdminController.GetProducer
 router.get('/get-products', VerifyAdminAccessToken, AdminController.GetAllProducts)
 router.get('/get-orders',VerifyAdminAccessToken, AdminController.GetOrders)
 router.get('/get-order/:id', VerifyAdminAccessToken, AdminController.GetOrderById)
+
 
 router.post('/send-sms-new-in-come',  AdminController.SendSMSNewInCome)
 

@@ -330,7 +330,6 @@ const SendSMSNewInCome = async (req, res) =>{
     }
 }
 
-
 const GetProducers = async (req, res) =>{
     const {producer_name} = req.params
     let WherePart = ``
@@ -522,6 +521,20 @@ const CreateOrderPDF = async (req, res) =>{
     }      
 }
 
+const UpdateImage = async (req, res) =>{
+    const {id} = req.params
+    const path = req.file.path
+    const query_text = `
+        UPDATE product_images SET destination = '${path}' WHERE product_id = ${id}
+    `
+    try {
+        const {rows} = await database.query(query_text, [])
+        return res.status(status.success).send(true)
+    } catch (e) {
+        console.log(e)
+        return res.status(status.error).send("Error")
+    }
+}
 
 module.exports = {
     LoadAdminUser,
@@ -543,5 +556,6 @@ module.exports = {
     UpdateUser,
     CreateOrderPDF,
     SendSMSNewInCome,
-    UpdateProducer
+    UpdateProducer,
+    UpdateImage
 }
