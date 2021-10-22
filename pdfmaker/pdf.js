@@ -42,7 +42,7 @@ async function OrderGenerator (data){
         .text('Sany', quantityX, tableTop)
         .text('Bahasy', priceX, tableTop)
         .text('Jemi', amountX, tableTop)
-    doc.rect(7, tableTop - 5, 560, 0.2).fillColor('#000').stroke('#000')
+    doc.rect(20, tableTop - 5, 540, 0.2).fillColor('#000').stroke('#000')
 
     // const items = invoice.items
     let i = 0
