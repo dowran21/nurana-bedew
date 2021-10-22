@@ -49,8 +49,8 @@ CREATE TABLE products(
     new_in_come BOOLEAN DEFAULT FALSE,
     quantity INTEGER NOT NULL,
     deleted BOOLEAN DEFAULT FALSE,
-    description_tm TEXT NOT NULL,
-    description_ru TEXT NOT NULL,
+    description_tm TEXT,
+    description_ru TEXT,
     
 
     CONSTRAINT producer_id_fk FOREIGN KEY (producer_id) REFERENCES producers(id)

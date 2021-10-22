@@ -183,12 +183,12 @@ const AddProduct = async (req, res) =>{
         INSERT INTO products(product_name, 
             producer_id, stock_count, price,  
             quantity, date_of_expire, description_tm, description_ru, updated_at, new_in_come)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, CURRENT_DATE, $9)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $7 CURRENT_DATE, $8)
         RETURNING *
         `
     try {
         const {rows} = await database.query(query_text, [product_name, producer_id, 
-            stock_count, price, quantity, date_of_expire, description_tm, description_ru, new_in_come])
+            stock_count, price, quantity, date_of_expire, description_tm, new_in_come])
         return res.status(status.success).json({"rows":rows[0]})
     } catch (e) {
         if(e.message == 'duplicate key value violates unique constraint "products_product_name_key"'){
@@ -219,7 +219,7 @@ const UpdateProduct = async (req, res) =>{
             const query_text = `
                 WITH updated AS (UPDATE products SET product_name = $1, producer_id = $2, stock_count = $3, 
                     price = $4, quantity = $5, date_of_expire = $6, 
-                    description_tm = $7, description_ru = $8 WHERE id = ${id}
+                    description_tm = $7, description_ru = $8, updated_at = CURRENT_DATE WHERE id = ${id}
                 ) SELECT u.main_phone, u.full_name, p.product_name
                     FROM users u
                         INNER JOIN notifications n
@@ -242,7 +242,7 @@ const UpdateProduct = async (req, res) =>{
     }else{
         const query_text = `UPDATE products SET product_name = $1, producer_id = $2, 
             stock_count = $3, price = $4, quantity = $5, date_of_expire = $6, 
-                description_tm = $7, description_ru = $8 WHERE id = ${id}
+                description_tm = $7, description_ru = $8, updated_at = CURRENT_DATE WHERE id = ${id}
             `
         try {
             const {rows} = await database.query(query_text, [product_name, producer_id, stock_count, 
