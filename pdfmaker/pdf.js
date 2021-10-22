@@ -62,12 +62,12 @@ async function OrderGenerator (data){
             .text(`${item.total_product_price} TMT`, amountX, y)
         doc.rect(7, y - 5, 560, 0.2).fillColor('#000').stroke('#000')
     }
-    doc.rect(7, h + 20, 560, 0.2).fillColor('#000').stroke('#000')
-    doc.rect(itemCodeX, tableTop, 0.2, h+20).fillColor('#000').stroke('#000')
-    doc.rect(descriptionX, tableTop, 0.2, h+20).fillColor('#000').stroke('#000')
-    doc.rect(quantityX, tableTop, 0.2, h+20).fillColor('#000').stroke('#000')
-    doc.rect(priceX, tableTop, 0.2, h+20).fillColor('#000').stroke('#000')
-    doc.rect(amountX, tableTop, 0.2, h+20).fillColor('#000').stroke('#000')
+    doc.rect(20, h + 20, 560, 0.2).fillColor('#000').stroke('#000')
+    doc.rect(itemCodeX -1, tableTop, 0.2, (tableTop-h+20)).fillColor('#000').stroke('#000')
+    doc.rect(descriptionX-1, tableTop, 0.2, (tableTop-h+20)).fillColor('#000').stroke('#000')
+    doc.rect(quantityX-1, tableTop, 0.2, (tableTop-h+20)).fillColor('#000').stroke('#000')
+    doc.rect(priceX-1, tableTop, 0.2, (tableTop-h+20)).fillColor('#000').stroke('#000')
+    doc.rect(amountX-1, tableTop, 0.2, (tableTop-h+20)).fillColor('#000').stroke('#000')
 
 
     const pdfBuffer = await new Promise(resolve => {
