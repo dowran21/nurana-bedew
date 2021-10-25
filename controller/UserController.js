@@ -70,14 +70,14 @@ const GetProducts = async (req, res) =>{
         WherePart += ` AND p.producer_id IN (${co_id.map(item => `${item}`).join(',')})`
     }
     if (product_name ){
-        WherePart += ` AND product_name ~* '${product_name}'`
+        WherePart += ` AND (product_name ~* '${product_name}' OR description_tm ~* '${product_name}')`
     }
     let OffSet = ``
     if(page && limit){
         OffSet = ` OFFSET ${(page-1)*limit} LIMIT ${limit}`
     }else{
         OffSet = ``
-    }
+    }  
     let OrderPart = ``
     if (price == 1){
         OrderPart = `ORDER BY p.price DESC`
