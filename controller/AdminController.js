@@ -528,7 +528,7 @@ const UpdateImage = async (req, res) =>{
     const query_text = `SELECT destination FROM product_images WHERE product_id = ${id}`
     try {
         const {rows} = database.query(query_text, [])
-        
+        console.log(rows)
         if(rows){
             image = rows[0].destination
         }
@@ -537,7 +537,7 @@ const UpdateImage = async (req, res) =>{
     }
     if(!image){
         const query_text1 = `
-            UPDATE product_images SET destination = '${path}' WHERE product_id = ${id}
+            UPDATE product_images SET destination = '${path}' WHERE product_id = ${id} RETURNING *
         `
         try {
             await database.query(query_text1, [])
