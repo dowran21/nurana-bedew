@@ -26,7 +26,7 @@ const Adding = async (data)=>{
                 INSERT INTO products(product_name, 
                     producer_id, stock_count, price,  
                     quantity, date_of_expire, updated_at)
-                    VALUES ($1, $2, 250, $3, $4, '20${date[1]}-${date[0]}-01'::DATE, CURRENT_DATE)
+                    VALUES ($1, $2, 5000, $3, $4, '20${date[1]}-${date[0]}-01'::DATE, CURRENT_DATE)
                 ON CONFLICT (product_name, deleted) WHERE (deleted = false) DO NOTHING
                 RETURNING *
                 `

@@ -1,6 +1,10 @@
 DROP DATABASE IF EXISTS nurly_bedew;
 
-CREATE DATABASE nurly_bedew;
+CREATE DATABASE nurly_bedew
+    TEMPLATE template0
+    ENCODING UTF8 
+    LC_COLLATE "ru_RU.utf8" 
+    LC_CTYPE "ru_RU.utf8";
 
 \c nurly_bedew;
 
