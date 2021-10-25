@@ -16,7 +16,6 @@ const Adding = async (data)=>{
             let producer_id = 0;
             const insert_producer = `INSERT INTO producers (producer_name) VALUES ('${product.producer}') RETURNING id`
             const {rows} = await database.query(`SELECT id FROM producers WHERE producer_name = '${product.producer}'`, [])
-            console.log(rows)
             if(rows[0]){
                 producer_id = rows[0].id
             }else{
@@ -40,54 +39,3 @@ const Adding = async (data)=>{
 }
 Adding(data)
 
-// console.log(date)
-// const AddProducer = async (req, res) =>{
-//     const {producer_name} = req.body
-//     const query_text = `
-//         INSERT INTO producers(producer_name) VALUES ('${producer_name}') RETURNING *
-//     `
-//     try {
-//         const {rows} = await database.query(query_text, [])
-//         return res.status(status.success).json({"rows":rows[0]})
-//     } catch (e) {
-//         console.log(e)
-//         return res.json(true)
-//     }
-// }
-
-
-// const AddProduct = async (req, res) =>{
-//     /**
-//  {
-//     "product_name":"Soma2252612", 
-//     "producer_id":1, 
-//     "stock_count":225, 
-//     "price":250, 
-//     "quantity":50, 
-//     "date_of_expire":"2021-03-28",
-//     "new_in_come":true,
-//     "description_tm":"Su derman barada yazylan yazylar name diyseniz shony diyin bize tapawudy yok", 
-//     "description_ru":"Bu name yazjak diyseniz shol yokarky zat yone bu dinekje orscasy name etseniz shony edin"
-// }
-//      */
-//     const {product_name, producer_id, stock_count, 
-//         price,  quantity, date_of_expire, description_tm, description_ru, new_in_come} = req.body
-//     const query_text = `
-//         INSERT INTO products(product_name, 
-//             producer_id, stock_count, price,  
-//             quantity, date_of_expire, description_tm, description_ru, updated_at, new_in_come)
-//             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, CURRENT_DATE, $9)
-//         RETURNING *
-//         `
-//     try {
-//         const {rows} = await database.query(query_text, [product_name, producer_id, 
-//             stock_count, price, quantity, date_of_expire, description_tm, description_ru, new_in_come])
-//         return res.status(status.success).json({"rows":rows[0]})
-//     } catch (e) {
-//         if(e.message == 'duplicate key value violates unique constraint "products_product_name_key"'){
-//             return res.status(status.created).json({"message":"The medicine with this name was added"})
-//         }
-//         console.log(e)
-//         return res.status(status.notfound).json(false)
-//     }
-// }
