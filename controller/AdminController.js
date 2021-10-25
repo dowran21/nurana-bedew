@@ -535,7 +535,7 @@ const UpdateImage = async (req, res) =>{
     } catch (e) {
         console.log(e)
     }
-    if(!image){
+    if(image){
         const query_text1 = `
             UPDATE product_images SET destination = '${path}' WHERE product_id = ${id} RETURNING *
         `
