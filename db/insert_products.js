@@ -33,6 +33,7 @@ const Adding = async (data)=>{
                 await database.query(query_text, [product.product_name, producer_id, 
                                             product.price, product.quantity_in_box])
         }catch(e){
+            console.log(e)
             console.log("product_name", product.product_name, "\nNumber of the row", i)
         }
     }
