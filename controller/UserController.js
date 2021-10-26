@@ -118,7 +118,6 @@ const GetProducts = async (req, res) =>{
                 `   
     try {
         const {rows} = await database.query(query_text, [])
-        console.log(rows[0].count)
         return res.status(status.success).json({"rows":rows})
     } catch (e) {
         console.log(e)
