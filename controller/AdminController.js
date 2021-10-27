@@ -247,7 +247,7 @@ const UpdateProduct = async (req, res) =>{
         try {
             const {rows} = await database.query(query_text, [product_name, producer_id, stock_count, 
                 price,  quantity, date_of_expire, description_tm, description_ru])
-            return res.status(status.error).send(true)
+            return res.status(status.success).send(true)
         } catch (e) {
             console.log(e)
             return res.status(status.error).send(false)
