@@ -538,19 +538,21 @@ const UpdateImage = async (req, res) =>{
             UPDATE product_images SET destination = '${path}' WHERE product_id = ${id} RETURNING *
         `
         try {
-            await database.query(query_text1, [])
-            return res.status(status.success).send(true)
+            const s = await database.query(query_text1, [])
+            const destination = s.rows[0].destination
+            return res.status(status.success).send(destination)
         } catch (e) {
             console.log(e)
             return res.status(status.error).send("Error")
         }
     }else{
         const query_text1 = `
-            INSERT INTO product_images(product_id, destination) VALUES (${id}, '${path}')
+            INSERT INTO product_images(product_id, destination) VALUES (${id}, '${path}') RETURNING *
         `
         try {
-            await database.query(query_text1, [])
-            return res.status(status.success).send(true)
+            const s = await database.query(query_text1, [])
+            const destination = s.rows[0].destination
+            return res.status(status.success).send(destination)
         } catch (e) {
             console.log(e)
             return res.status(status.error).send("Error")
