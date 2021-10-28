@@ -37,7 +37,7 @@ router.get('/get-orders',VerifyAdminAccessToken, AdminController.GetOrders)
 router.get('/get-order/:id', VerifyAdminAccessToken, AdminController.GetOrderById)
 
 
-router.post('/send-sms-new-in-come',  AdminController.SendSMSNewInCome)
-
+router.post('/send-sms-new-in-come', VerifyAdminAccessToken, AdminController.SendSMSNewInCome)
+router.post('/update-new-in-come', VerifyAdminAccessToken, AdminController.RemoveFromNewInCome)
 
 module.exports = router

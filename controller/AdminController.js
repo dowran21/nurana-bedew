@@ -560,6 +560,16 @@ const UpdateImage = async (req, res) =>{
     }
 }
 
+const RemoveFromNewInCome = async (req, res) =>{
+    const query_text = `UPDATE products SET new_in_come = false`
+    try {
+        await database(query_text, [])
+        return res.status(status.success).send(true)
+    } catch (e) {
+        return res.status(status.error).send(false)
+    }
+}
+
 module.exports = {
     LoadAdminUser,
     AdminLogin,
@@ -581,5 +591,6 @@ module.exports = {
     CreateOrderPDF,
     SendSMSNewInCome,
     UpdateProducer,
-    UpdateImage
+    UpdateImage,
+    RemoveFromNewInCome
 }
