@@ -563,7 +563,7 @@ const UpdateImage = async (req, res) =>{
 const RemoveFromNewInCome = async (req, res) =>{
     const query_text = `UPDATE products SET new_in_come = false`
     try {
-        await database(query_text, [])
+        await database.query(query_text, [])
         return res.status(status.success).send(true)
     } catch (e) {
         console.log(e)
