@@ -566,6 +566,7 @@ const RemoveFromNewInCome = async (req, res) =>{
         await database(query_text, [])
         return res.status(status.success).send(true)
     } catch (e) {
+        console.log(e)
         return res.status(status.error).send(false)
     }
 }
