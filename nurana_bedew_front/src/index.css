@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer utilities {
+  @responsive {
+    .custom-shadow {
+      -webkit-box-shadow: -3px 10px 20px -27px rgba(0, 0, 0, 1);
+      -moz-box-shadow: -3px 10px 20px -27px rgba(0, 0, 0, 1);
+      box-shadow: -3px 10px 20px -27px rgba(0, 0, 0, 1);
+    }
+
+    .remove-button-bg {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .ml-07 {
+      margin-left: 0.15rem !important;
+    }
+
+    .mt-tiny {
+      margin-top: 0.05rem !important
+    }
+  }
+}
+
+
+.react-datetime-picker__wrapper {
+  padding: 3px;
+  border-radius: 3px;
+  border: 1px solid #ffffff;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
