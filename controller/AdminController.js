@@ -168,7 +168,7 @@ const AddProduct = async (req, res) =>{
     const query_text = `
         INSERT INTO products(product_name, 
             producer_id, stock_count, price,  
-            quantity, date_of_expire, description_tm, description_ru, updated_at, new_in_come)
+            quantity, date_of_expire, description_tm, description_ru, new_in_come)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $7 CURRENT_DATE, $8)
         RETURNING *
         `
