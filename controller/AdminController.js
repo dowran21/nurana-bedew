@@ -134,21 +134,6 @@ const DeleteUser = async (req, res) =>{
     }
 }
 
-// const AddCategory = async (req, res) =>{
-//     const {category_name} = req.body
-//     const query_text = `
-//         INSERT INTO categories(category_name) VALUES ('${category_name}') RETURNING *
-//     `
-//     console.log(category_name)
-//     try {
-//         const {rows} = await database.query(query_text, [])
-//         return res.status(200).json({"rows":rows[0]})
-//     } catch (e) {
-//         console.log(e)
-//         return res.status(500).json(false)
-//     }
-// }
-
 const AddProducer = async (req, res) =>{
     const {producer_name} = req.body
     const query_text = `
@@ -179,6 +164,7 @@ const AddProduct = async (req, res) =>{
      */
     const {product_name, producer_id, stock_count, 
         price,  quantity, date_of_expire, description_tm, description_ru, new_in_come} = req.body
+    console.log(req.body)
     const query_text = `
         INSERT INTO products(product_name, 
             producer_id, stock_count, price,  
@@ -194,7 +180,7 @@ const AddProduct = async (req, res) =>{
         if(e.message == 'duplicate key value violates unique constraint "products_product_name_key"'){
             return res.status(status.created).json({"message":"The medicine with this name was added"})
         }
-        console.log(e)
+        // console.log(e)
         return res.status(status.notfound).json(false)
     }
 }
