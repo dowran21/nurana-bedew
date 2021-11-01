@@ -203,7 +203,7 @@ const UpdateProduct = async (req, res) =>{
             const query_text = `
                 WITH updated AS (UPDATE products SET product_name = $1, producer_id = $2, stock_count = $3, 
                     price = $4, quantity = $5, date_of_expire = $6, 
-                    description_tm = $7, description_ru = $8, updated_at = CURRENT_DATE WHERE id = ${id}
+                    description_tm = $7, description_ru = $7, updated_at = CURRENT_DATE WHERE id = ${id}
                 ) SELECT u.main_phone, u.full_name, p.product_name
                     FROM users u
                         INNER JOIN notifications n
@@ -213,7 +213,7 @@ const UpdateProduct = async (req, res) =>{
                     WHERE p.id = ${id}
                 `
             const {rows} = await database.query(query_text, [product_name, producer_id, stock_count, 
-                price,  quantity, date_of_expire, description_tm, description_ru])
+                price,  quantity, date_of_expire, description_tm])
             for (let i=0; i<rows.length; i++){
                 const mess = `HORMATLY ${rows[0].full_name}. Sizin bellige goyan ${rows[0].product_name} dermanyn gelendigini size habar beryaris`;
                 SendSMS({phone:`${rows[0].main_phone}`, message:mess})
