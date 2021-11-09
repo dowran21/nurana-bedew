@@ -176,7 +176,27 @@ const AddProduct = async (req, res) =>{
     try {
         const {rows} = await database.query(query_text, [product_name, producer_id, 
             stock_count, price, quantity, date_of_expire, description_tm, new_in_come])
-        return res.status(status.success).json({"rows":rows[0]})
+        try {
+            const query_t1 = `
+                    SELECT p.id, product_name, producer_name, p.producer_id,
+                        stock_count, price, date_of_expire, new_in_come,
+                        quantity, description_tm, description_ru,
+                            (SELECT destination FROM product_images
+                            WHERE product_id = p.id LIMIT 1    
+                            ) AS image
+                        FROM products p
+                            INNER JOIN producers prd 
+                                ON prd.id = p.producer_id
+                        WHERE p.deleted = false AND id = ${rows[0].id}
+            `
+            const k = await database.query(query_t1, [])
+            const pr = k.rows[0]
+            return res.status(status.success).json({"rows":k})    
+        } catch (e) {
+            console.log(e)
+            return res.status(status.error).send(fasle)
+        }
+        
     } catch (e) {
         if(e.message == 'duplicate key value violates unique constraint "products_product_name_key"'){
             return res.status(status.created).json({"message":"The medicine with this name was added"})
