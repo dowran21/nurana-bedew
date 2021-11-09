@@ -191,7 +191,8 @@ const AddProduct = async (req, res) =>{
             `
             const k = await database.query(query_t1, [])
             const pr = k.rows[0]
-            return res.status(status.success).json({"rows":k})    
+            console.log(pr)
+            return res.status(status.success).json({"rows":pr})    
         } catch (e) {
             console.log(e)
             return res.status(status.error).send(fasle)
