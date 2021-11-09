@@ -187,7 +187,7 @@ const AddProduct = async (req, res) =>{
                         FROM products p
                             INNER JOIN producers prd 
                                 ON prd.id = p.producer_id
-                        WHERE p.deleted = false AND id = ${rows[0].id}
+                        WHERE p.deleted = false AND p.id = ${rows[0].id}
             `
             const k = await database.query(query_t1, [])
             const pr = k.rows[0]
