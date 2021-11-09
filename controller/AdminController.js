@@ -23,6 +23,7 @@ const AdminLogin = async (req, res) =>{
      *********/
     console.log("I am in admin login controller")
     const {password, phone} = req.body
+    console.log(req.body)
     const query_text = `
         SELECT * FROM users u WHERE u.main_phone = $1 AND role_id = 1
     `
