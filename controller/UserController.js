@@ -61,7 +61,7 @@ const UserRefresh = async (req, res) =>{
 
 const GetProducts = async (req, res) =>{
     const {page, limit} = req.query
-    const user_id = req.user.id
+    // const user_id = req.user.id
     const {product_name, price, new_in_come, producer_id} = req.query //price true bolse artyan tertipde gruppirowka false bolsa kemelyan tertipde
     // console.log(country_id)
     let WherePart = ``
