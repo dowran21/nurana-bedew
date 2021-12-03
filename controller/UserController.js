@@ -127,7 +127,7 @@ const GetProducts = async (req, res) =>{
 
 const GetProductById = async (req, res) => {
     const {id} = req.params
-    const user_id = req.user.id
+    // const user_id = req.user.id
     const query_text = `
                 SELECT p.id, p.product_name, p.price::text, p.stock_count, p.quantity::INTEGER,
                     prd.producer_name, p.description_tm, p.description_ru, 
