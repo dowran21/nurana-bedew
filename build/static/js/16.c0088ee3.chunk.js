@@ -1,0 +1,2 @@
+(this.webpackJsonpnurana_bedew=this.webpackJsonpnurana_bedew||[]).push([[16],{483:function(e,n,t){"use strict";t.r(n);t(0);var a=t(1);n.default=function(){return Object(a.jsx)("div",{children:"Product Page"})}}}]);
+//# sourceMappingURL=16.c0088ee3.chunk.js.map
