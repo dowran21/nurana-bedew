@@ -530,42 +530,24 @@ const CreateOrderPDF = async (req, res) =>{
 const UpdateImage = async (req, res) =>{
     const {id} = req.params
     const path = req.file.path
-    let image = ``
-    const query_text = `SELECT destination FROM product_images WHERE product_id = ${id}`
     try {
-        const {rows} = database.query(query_text, [])
-        console.log(rows)
-        if(rows){
-            image = rows[0].destination
-        }
+        await database.query(`DELETE FROM product_images WHERE product_id = ${id}`)
     } catch (e) {
         console.log(e)
+        return res.status(status.error).send(false)
     }
-    if(image){
-        const query_text1 = `
-            UPDATE product_images SET destination = '${path}' WHERE product_id = ${id} RETURNING *
-        `
-        try {
-            const s = await database.query(query_text1, [])
-            const destination = s.rows[0].destination
-            return res.status(status.success).send(destination)
-        } catch (e) {
-            console.log(e)
-            return res.status(status.error).send("Error")
-        }
-    }else{
-        const query_text1 = `
-            INSERT INTO product_images(product_id, destination) VALUES (${id}, '${path}') RETURNING *
-        `
-        try {
-            const s = await database.query(query_text1, [])
-            const destination = s.rows[0].destination
-            return res.status(status.success).send(destination)
-        } catch (e) {
-            console.log(e)
-            return res.status(status.error).send("Error")
-        }
+    const query_text1 = `
+        INSERT INTO product_images(product_id, destination) VALUES (${id}, '${path}') RETURNING *
+    `
+    try {
+        const s = await database.query(query_text1, [])
+        const destination = s.rows[0].destination
+        return res.status(status.success).send(destination)
+    } catch (e) {
+        console.log(e)
+        return res.status(status.error).send("Error")
     }
+    
 }
 
 const RemoveFromNewInCome = async (req, res) =>{
