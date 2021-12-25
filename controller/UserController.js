@@ -80,12 +80,12 @@ const GetProducts = async (req, res) =>{
     }  
     let OrderPart = ``
     if (price == 1){
-        OrderPart = `ORDER BY p.price DESC`
+        OrderPart = `, p.price DESC`
     }else{
         if(price == 2){
-            OrderPart = `ORDER BY p.price ASC`
+            OrderPart = `, p.price ASC`
         }else{
-            OrderPart = `ORDER BY p.id ASC`
+            OrderPart = `, p.id ASC`
         }
     }
     if(new_in_come === '1'){
@@ -110,7 +110,7 @@ const GetProducts = async (req, res) =>{
                     INNER JOIN producers prd 
                         ON prd.id = p.producer_id
                 WHERE p.deleted = 'false'${WherePart}
-                ${OrderPart}
+                ORDER BY p.product_name ASC ${OrderPart}
                 ${OffSet}
 
                 )prod) AS products
