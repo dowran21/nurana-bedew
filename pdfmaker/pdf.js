@@ -54,14 +54,15 @@ async function OrderGenerator (data){
         const item = order_items[i]
         let y = tableTop + 25 + ((i-j) * 25)
         if(y > 750){
-            tableTop = 50;
-            j = i;
+            
             doc.rect(17, h + 20, 540, 0.2).fillColor('#000').stroke('#000')
             doc.rect(itemCodeX -3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
             doc.rect(descriptionX-3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
             doc.rect(quantityX-3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
             doc.rect(priceX-3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
             doc.rect(amountX-3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
+            tableTop = 50;
+            j = i;
             doc.addPage()
         }
         y = tableTop + 25 + ((i-j) * 25)
