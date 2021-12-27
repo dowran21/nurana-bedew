@@ -56,6 +56,12 @@ async function OrderGenerator (data){
         if(y > 750){
             tableTop = 50;
             j = i;
+            doc.rect(17, h + 20, 540, 0.2).fillColor('#000').stroke('#000')
+            doc.rect(itemCodeX -3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
+            doc.rect(descriptionX-3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
+            doc.rect(quantityX-3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
+            doc.rect(priceX-3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
+            doc.rect(amountX-3, tableTop-4, 0.2, (h-tableTop+20)).fillColor('#000').stroke('#000')
             doc.addPage()
         }
         y = tableTop + 25 + ((i-j) * 25)
@@ -65,8 +71,8 @@ async function OrderGenerator (data){
             .text(item.product_id, itemCodeX, y)
             .text(`${item.product_name.substring(0, 70)}`, descriptionX, y)
             .text(item.quantity, quantityX, y)
-            .text(`${item.product_price} TMT`, priceX, y)
-            .text(`${item.total_product_price} TMT`, amountX, y)
+            .text(`${item.product_price}`, priceX, y)
+            .text(`${item.total_product_price}`, amountX, y)
         doc.rect(17, y - 5, 540, 0.2).fillColor('#000').stroke('#000')
     }
     doc.rect(17, h + 20, 540, 0.2).fillColor('#000').stroke('#000')
