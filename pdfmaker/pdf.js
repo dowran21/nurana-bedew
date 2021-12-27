@@ -48,15 +48,21 @@ async function OrderGenerator (data){
     let i = 0
 
     let h = 0
+    let j = 0;
 
     for (i = 0; i < order_items.length; i++) {
         const item = order_items[i]
-    
-        const y = tableTop + 25 + (i * 25)
+        let y = tableTop + 25 + ((i-j) * 25)
+        if(y > 680){
+            tableTop = 50;
+            j = i;
+            doc.addPage()
+        }
+        y = tableTop + 25 + ((i-j) * 25)
         h=y;
         doc
             .fontSize(10).font(arial)
-            .text(item.product_id, itemCodeX, y, {continued: true})
+            .text(item.product_id, itemCodeX, y)
             .text(`${item.product_name.substring(0, 70)}`, descriptionX, y)
             .text(item.quantity, quantityX, y)
             .text(`${item.product_price} TMT`, priceX, y)
