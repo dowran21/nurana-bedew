@@ -11,7 +11,7 @@ const ComparePassword = async (password, hash) =>{
 };
 
 const GenerateUserAccessToken = async(data) =>{
-    return JWT.sign(data, process.env.ACCESS_SECRET_KEY, {expiresIn:"10d"})
+    return JWT.sign(data, process.env.ACCESS_SECRET_KEY, {expiresIn:"20d"})
 };
 
 const GenerateUserRefreshToken = async(data) =>{
