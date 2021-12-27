@@ -53,7 +53,7 @@ async function OrderGenerator (data){
     for (i = 0; i < order_items.length; i++) {
         const item = order_items[i]
         let y = tableTop + 25 + ((i-j) * 25)
-        if(y > 680){
+        if(y > 750){
             tableTop = 50;
             j = i;
             doc.addPage()
