@@ -40,4 +40,8 @@ router.get('/get-order/:id', VerifyAdminAccessToken, AdminController.GetOrderByI
 router.post('/send-sms-new-in-come', VerifyAdminAccessToken, AdminController.SendSMSNewInCome)
 router.post('/update-new-in-come', VerifyAdminAccessToken, AdminController.RemoveFromNewInCome)
 
+router.post('/add-news', VerifyAdminAccessToken, AdminController.AddNews);
+router.get('/get-news', VerifyAdminAccessToken, AdminController.GetNews);
+router.post('/delete-news/:id', VerifyAdminAccessToken, AdminController.DeleteNews);
+
 module.exports = router

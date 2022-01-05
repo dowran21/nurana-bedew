@@ -651,5 +651,6 @@ module.exports = {
     UpdateImage,
     RemoveFromNewInCome,
     AddNews,
-    GetNews
+    GetNews,
+    DeleteNews
 }
