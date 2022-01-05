@@ -65,12 +65,12 @@ const GetUsers = async (req, res) =>{
             SELECT json_agg(us) FROM (
                 SELECT id, full_name, main_phone, email, password
                 FROM users 
-                WHERE role_id = 2 AND deleted = false${WherePart}
+                WHERE role_id = 2 AND deleted = false ${WherePart}
                 ORDER BY added_time DESC
                 ${OffSet}
                 )us) AS users,
             (SELECT COUNT(*) FROM users 
-            WHERE role_id = 2 ${WherePart});
+            WHERE role_id = 2 AND deleted = false ${WherePart});
     `
     try {
         const {rows} = await database.query(query_text, [])
@@ -598,15 +598,6 @@ const GetNews = async (req, res) =>{
             FROM news 
             ${offSet}
         )new) AS news
-    `
-    const query_for_users = `
-    SELECT (SELECT COUNT (*) FROM news WHERE validity::tsrange @> localtimestamp), 
-    (SELECT json_agg(new) FROM (
-        SELECT id, title, text, lower(validity)::text AS low_val, upper(validity)::text AS upper_val
-        FROM news 
-        WHERE validity::tsrange @> localtimestamp
-        ${offSet}
-    )new) AS news
     `
     try {
         const {rows} = await database.query(query_text, [])
