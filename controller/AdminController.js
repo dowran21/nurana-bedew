@@ -571,9 +571,13 @@ const AddNews = async (req, res) =>{
     try {
         const {rows} = await database.query(query_text, [])
         try {
-            const s_query = ``
+            const s_query = `SELECT id, title, text, lower(validity)::text AS low_val, upper(validity)::text AS upper_val
+            FROM news WHERE id = ${rows[0].id}`
+            const s = await database.query(s_query, [])
+            return res.status(status.success).json({rows:rows[0]})
         } catch (e) {
-            
+            console.log(e)
+            return res.status(status.error).send(e)
         }
     } catch (e) {
         console.log(e)
