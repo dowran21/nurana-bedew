@@ -565,7 +565,7 @@ const AddNews = async (req, res) =>{
     const {title, text, start_date, end_date} = req.body;
     const query_text = `
         INSERT INTO news(title, text, validity) 
-            VALUES ('${title}', '${text}', '[${start_date}::date, ${end_date}::date]')
+            VALUES ('${title}', '${text}', '[${start_date}, ${end_date}]')
             RETURNING *    
         `    
     try {
