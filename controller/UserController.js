@@ -34,7 +34,7 @@ const UserLogin = async (req, res) =>{
 const UserRefresh = async (req, res) =>{
     const {refresh_token} = req.body
     if(!refresh_token){
-        return res.status(status.unauthorized).json({"message":"Unauthorized"})
+        return res.status(status.not_authorized).json({"message":"Unauthorized"})
     }
     JWT.verify(refresh_token, process.env.REFRESH_SECRET_KEY, async(err, decoded)=>{
         if(err){
@@ -470,7 +470,29 @@ const GetCategoryProducts = async (req, res) =>{
     }
 }
 
-
+const GetNews = async (req, res) =>{
+    const {page, limit} = req.query;
+    let offSet = ``
+    if(page && limit){
+        offSet = `OFFSET ${page*limit} LIMIT ${limit}`
+    }
+    const query_text = `
+        SELECT (SELECT COUNT (*) FROM news WHERE validity::tsrange @> localtimestamp), 
+        (SELECT json_agg(new) FROM (
+            SELECT id, title, text, lower(validity)::text AS low_val, upper(validity)::text AS upper_val
+            FROM news 
+            WHERE validity::tsrange @> localtimestamp
+            ${offSet}
+        )new) AS news
+    `
+    try {
+        const {rows} = await database.query(query_text, [])
+        return res.status(status.success).json({rows:rows[0]})
+    } catch (e) {
+        console.log(e)
+        return res.status(status.error).send(e)
+    }
+}
 
 module.exports = {
     UserLogin,
@@ -489,5 +511,6 @@ module.exports = {
     GetCategoryProducts,
     UpdateCartProduct,
     GetProducers,
-    GetOrderById
+    GetOrderById,
+    GetNews
 }
