@@ -428,7 +428,7 @@ const GetOrders = async (req, res) =>{
                     ON u.id = o.user_id 
             WHERE o.id>0 ${WherePart}) AS count,
             (SELECT json_agg(ord) FROM
-                (SELECT to_char(o.created_at, 'DD-MM-YYYY HH24:MI') AS created_date, to_char(o.created_at, 'HH-MM') AS created_time,
+                (SELECT to_char(o.created_at, 'DD-MM-YYYY') AS created_date, to_char(o.created_at, ' HH24:MI') AS created_time,
                   o.has_seen, o.accepted, o.total_price, o.id, u.full_name, u.main_phone, accepted, top.paymant_name
                 FROM orders o
                     INNER JOIN users u 
