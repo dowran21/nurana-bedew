@@ -382,7 +382,7 @@ const GetAllProducts = async (req, res) =>{
         SELECT (
             SELECT COUNT(*) 
             FROM products p
-                WHERE p.id > 0 ${WherePart}
+                WHERE p.id > 0 AND p.deleted = false ${WherePart}
             ) AS count,
             (SELECT json_agg(pr) FROM
                 (SELECT p.id, product_name, producer_name, p.producer_id,
