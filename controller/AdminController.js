@@ -561,6 +561,72 @@ const RemoveFromNewInCome = async (req, res) =>{
     }
 }
 
+const AddNews = async (req, res) =>{
+    const {title, text, start_date, end_date} = req.body;
+    const query_text = `
+        INSERT INTO news(title, text, validity) 
+            VALUES ('${title}', '${text}', '[${start_date}::date, ${end_date}::date]')
+            RETURNING *    
+        `    
+    try {
+        const {rows} = await database.query(query_text, [])
+        try {
+            const s_query = ``
+        } catch (e) {
+            
+        }
+    } catch (e) {
+        console.log(e)
+        return res.status(status.error).send(e)
+    }
+}
+
+const GetNews = async (req, res) =>{
+    const {page, limit} = req.query;
+    let offSet = ``
+    if(page && limit){
+        offSet = `OFFSET ${page*limit} LIMIT ${limit}`
+    }
+    const query_text = `
+        SELECT (SELECT COUNT (*) FROM news), 
+        (SELECT json_agg(new) FROM (
+            SELECT id, title, text, lower(validity)::text AS low_val, upper(validity)::text AS upper_val
+            FROM news 
+            ${offSet}
+        )new) AS news
+    `
+    const query_for_users = `
+    SELECT (SELECT COUNT (*) FROM news WHERE validity::tsrange @> localtimestamp), 
+    (SELECT json_agg(new) FROM (
+        SELECT id, title, text, lower(validity)::text AS low_val, upper(validity)::text AS upper_val
+        FROM news 
+        WHERE validity::tsrange @> localtimestamp
+        ${offSet}
+    )new) AS news
+    `
+    try {
+        const {rows} = await database.query(query_text, [])
+        return res.status(status.success).json({rows:rows[0]})
+    } catch (e) {
+        console.log(e)
+        return res.status(status.error).send(e)
+    }
+}
+
+const DeleteNews = async (req, res) =>{
+    const {id} = req.params;
+    const query_text = `
+        DELETE FROM news WHERE id = ${id}
+    `
+    try {
+        await database.query(query_text, [])
+        return res.status(status.success).send(true)
+    } catch (e) {
+        console.log(e)
+        return res.status(status.error).send(e)
+    }
+}
+
 module.exports = {
     LoadAdminUser,
     AdminLogin,
@@ -583,5 +649,7 @@ module.exports = {
     SendSMSNewInCome,
     UpdateProducer,
     UpdateImage,
-    RemoveFromNewInCome
+    RemoveFromNewInCome,
+    AddNews,
+    GetNews
 }
