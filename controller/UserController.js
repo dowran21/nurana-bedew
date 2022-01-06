@@ -97,7 +97,7 @@ const GetProducts = async (req, res) =>{
             FROM products p
                 INNER JOIN producers prd 
                     ON prd.id = p.producer_id
-            WHERE p.id > 0${WherePart}) AS count,
+            WHERE p.id > 0 AND p.deleted = 'false' ${WherePart}) AS count,
 
             (SELECT json_agg(prod) FROM
                 
@@ -109,7 +109,7 @@ const GetProducts = async (req, res) =>{
                 FROM products p
                     INNER JOIN producers prd 
                         ON prd.id = p.producer_id
-                WHERE p.deleted = 'false'${WherePart}
+                WHERE p.deleted = 'false' ${WherePart}
                 ORDER BY p.product_name ASC ${OrderPart}
                 ${OffSet}
 
