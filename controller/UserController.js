@@ -322,6 +322,7 @@ const CreateOrder = async (req, res) =>{
         ) ${OrderProductPart} SELECT id FROM inserted
     `
     try{
+        console.log(query_text)
         const {rows} = await database.query(query_text, [])
         return res.status(status.success).send(true)
     }catch(e){
