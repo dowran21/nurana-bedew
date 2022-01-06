@@ -11,15 +11,15 @@ const ComparePassword = async (password, hash) =>{
 };
 
 const GenerateUserAccessToken = async(data) =>{
-    return JWT.sign(data, process.env.ACCESS_SECRET_KEY, {expiresIn:"20d"})
+    return JWT.sign(data, process.env.ACCESS_SECRET_KEY, {expiresIn:"365d"})
 };
 
 const GenerateUserRefreshToken = async(data) =>{
-    return JWT.sign(data, process.env.REFRESH_SECRET_KEY, {expiresIn:"30d"})
+    return JWT.sign(data, process.env.REFRESH_SECRET_KEY, {expiresIn:"365d"})
 };
 
 const GenerateAdminAccessToken = async(data) =>{
-    return JWT.sign(data, process.env.ADMIN_ACCESS_SECRET_KEY, {expiresIn:"1d"})
+    return JWT.sign(data, process.env.ADMIN_ACCESS_SECRET_KEY, {expiresIn:"365d"})
 };
 
 module.exports = {
