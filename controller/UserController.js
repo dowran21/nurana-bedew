@@ -293,7 +293,7 @@ const CreateOrder = async (req, res) =>{
     const user_id = req.user.id
     const {qty} = req.body
     let order_products = JSON.parse(qty)
-
+    console.log(order_products)
     const {payment_id} = req.params
     let OrderProductPart = ``
     let i = 0;
