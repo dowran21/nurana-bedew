@@ -24,7 +24,7 @@ const VerifyAdminAccessToken = async (req, res, next) =>{
 
 const VerifyUserAccessToken = async (req, res, next) =>{
     let token = req.headers.authorization;
-    token = token.replace("Bearer ", "");
+    token = token?.replace("Bearer ", "");
     if (token === 'null'){
         return res.status(status.not_authorized).send("Unautharized")
     };
@@ -40,7 +40,7 @@ const VerifyUserAccessToken = async (req, res, next) =>{
     })
 }
 
-
+ 
 module.exports = {
     VerifyAdminAccessToken,
     VerifyUserAccessToken
