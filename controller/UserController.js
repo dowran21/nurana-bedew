@@ -88,7 +88,7 @@ const GetProducts = async (req, res) =>{
             OrderPart = `, p.id ASC`
         }
     }
-    if(new_in_come === '1'){
+    if(new_in_come == '1'){
         WherePart += ` AND new_in_come = true`
     }
     const query_text = `
