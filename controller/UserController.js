@@ -301,15 +301,15 @@ const CreateOrder = async (req, res) =>{
         let product = order_products[i]
         OrderProductPart += `, insertprod${i} AS (
             INSERT INTO order_items(product_id, quantity, order_id, product_price)
-            VALUES(${product.id}, ${product.count}, (SELECT id FROM inserted), 
+            VALUES(${product.id}, ${product.cartQuantity}, (SELECT id FROM inserted), 
                 (SELECT price FROM products WHERE id = ${product.id}) )
 
         ), updated_stock${i} AS (
-            UPDATE products SET stock_count = products.stock_count - ${product.count} WHERE id = ${product.id}
+            UPDATE products SET stock_count = products.stock_count - ${product.cartQuantity} WHERE id = ${product.id}
         
         ), update_total_price${i} AS (
             UPDATE orders SET 
-                total_price = orders.total_price + ((SELECT price FROM products WHERE id = ${product.id})*${product.count}) 
+                total_price = orders.total_price + ((SELECT price FROM products WHERE id = ${product.id})*${product.cartQuantity}) 
                 WHERE id = (SELECT id FROM inserted)
         )`
     }
