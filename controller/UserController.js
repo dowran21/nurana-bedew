@@ -83,8 +83,7 @@ const GetProducts = async (req, res) =>{
         OrderPart = `ORDER BY p.price DESC`
     }else if(price == 2){
         OrderPart = `ORDER BY p.price ASC`        
-    }
-    if(price != 1 || price != 2){
+    }else{
         OrderPart = `ORDER BY p.product_name ASC, p.id ASC`
     }
     if(new_in_come == '1'){
