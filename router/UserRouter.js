@@ -21,6 +21,6 @@ router.post('/add-to-notifications/:id', VerifyUserAccessToken, UserController.A
 router.post('/remove-from-notifications/:id', VerifyUserAccessToken, UserController.RemoveFromNotifications)
 router.get('/get-notifications', VerifyUserAccessToken, UserController.GetNotifications)
 
-router.get('/get-news', VerifyUserAccessToken, UserController.GetNews)
+router.get('/get-news',  UserController.GetNews)
 
 module.exports = router
