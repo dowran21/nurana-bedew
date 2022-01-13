@@ -6,15 +6,15 @@ const UserController = require('../controller/UserController.js')
 router.post('/login', UserController.UserLogin)
 router.post('/refresh', UserController.UserRefresh)
 
-router.get('/get-products', VerifyUserAccessToken, UserController.GetProducts)
-router.get('/get-product/:id', VerifyUserAccessToken, UserController.GetProductById)
-router.get('/get-producers', VerifyUserAccessToken, UserController.GetProducers)
+router.get('/get-products',  UserController.GetProducts)
+router.get('/get-product/:id',  UserController.GetProductById)
+router.get('/get-producers',  UserController.GetProducers)
 
 router.post('/create-order/:payment_id', VerifyUserAccessToken, UserController.CreateOrder)
 router.get('/get-orders', VerifyUserAccessToken, UserController.GetOrders)
 router.get('/get-order/:id', VerifyUserAccessToken, UserController.GetOrderById)
 router.post('/update-cart-product/:cart_id/:product_id', VerifyUserAccessToken,  UserController.UpdateCartProduct)
-router.post('/get-cart-products', VerifyUserAccessToken, UserController.GetCartProducts)
+router.post('/get-cart-products',  UserController.GetCartProducts)
 
 
 router.post('/add-to-notifications/:id', VerifyUserAccessToken, UserController.AddNotification)
