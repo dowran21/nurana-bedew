@@ -1,14 +1,14 @@
 const express = require('express')
 const router = new express.Router()
-const {VerifyUserAccessToken} = require('../middleware/AuthMiddleware.js')
+const {VerifyUserAccessToken, VerifyUserAccessTokenNext} = require('../middleware/AuthMiddleware.js')
 const UserController = require('../controller/UserController.js')
 
 router.post('/login', UserController.UserLogin)
 router.post('/refresh', UserController.UserRefresh)
 
-router.get('/get-products',  UserController.GetProducts)
-router.get('/get-product/:id',  UserController.GetProductById)
-router.get('/get-producers',  UserController.GetProducers)
+router.get('/get-products',  VerifyUserAccessTokenNext, UserController.GetProducts)
+router.get('/get-product/:id',VerifyUserAccessTokenNext,  UserController.GetProductById)
+router.get('/get-producers',  VerifyUserAccessTokenNext, UserController.GetProducers)
 
 router.post('/create-order/:payment_id', VerifyUserAccessToken, UserController.CreateOrder)
 router.get('/get-orders', VerifyUserAccessToken, UserController.GetOrders)
