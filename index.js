@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000
 let dir = path.join(__dirname, 'uploads')
 
 const allowedOrigins = ['http://localhost:3001', 'http://localhost:8000', 'http://localhost:3000','http://localhost:7000', 'http://141.136.44.174:7001', 
-    'http://site.nurana-bedew.online'];
+    'http://admin.nurana-bedew.online'];
 //const allowedOrigins = ['http://localhost:8090', 'http://10.60.1.20:9062', 'http://95.85.97.206:9062'];
 app.use(cors({
     origin: function (origin, callback) {
