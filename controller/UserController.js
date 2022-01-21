@@ -100,7 +100,7 @@ const GetProducts = async (req, res) =>{
             (SELECT json_agg(prod) FROM
                 
                 (SELECT p.id, p.product_name,
-                    (p.price${user_id ? `*1` : `*3`})::text, p.stock_count::INTEGER, 
+                    (p.price${user_id ? `*1` : `*3`})::text AS price, p.stock_count::INTEGER, 
                         (SELECT destination FROM product_images pi
                         WHERE pi.product_id = p.id LIMIT 1
                         ) AS image
