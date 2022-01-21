@@ -43,10 +43,30 @@ const VerifyUserAccessToken = async (req, res, next) =>{
     })
 }
 
+const VerifyUserAccessTokenNext = async (req, res, next) =>{
+    let token = req?.headers?.authorization;
+    // if (token === 'null'){
+    //     return res.status(status.not_authorized).send("Unautharized")
+    // };
+    token = token?.replace("Bearer ", "");
+    if (token === 'null'){
+        next()
+    };
+    JWT.verify(token, process.env.ACCESS_SECRET_KEY, async(err, decoded) =>{
+        if(err){
+            next()
+        }
+        if (decoded){
+            req.user = decoded;
+            next()
+        }     
+    })
+}
  
 module.exports = {
     VerifyAdminAccessToken,
-    VerifyUserAccessToken
+    VerifyUserAccessToken,
+    VerifyUserAccessTokenNext
 }
 
 // echo "# nurana-bedew" >> README.md
