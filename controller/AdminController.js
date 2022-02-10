@@ -580,7 +580,7 @@ const AddNews = async (req, res) =>{
     try {
         const {rows} = await database.query(query_text, [])
         let message = {
-            data : {title:`${title}`, body:`${text.substring(0, 50)}`}
+            data : {title:`${title}`, body:`${text.substring(0, 200)}`}
         }
         await admin.messaging().sendToTopic('Events',message)
         try {
