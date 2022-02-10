@@ -7,6 +7,15 @@ const fs = require('fs');
 // const e = require('express');
 const path = require('path');
 const { success } = require('../utils/status.js');
+const admin = require("firebase-admin");
+// const { query } = require('../db/index');
+const serviceAccount = require(process.env.PATH_TO_PUSH_JSON)
+const FIREBASE_DATABASE_URL = "https://nurana-bedew-default-rtdb.firebaseio.com"
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseUrl: FIREBASE_DATABASE_URL
+})
+
 
 const LoadAdminUser = async (req, res) =>{
     if(req.user){
@@ -570,6 +579,10 @@ const AddNews = async (req, res) =>{
         `    
     try {
         const {rows} = await database.query(query_text, [])
+        let message = {
+            data : {title:`${title}`, body:`${text.substring(0, 50)}`}
+        }
+        await admin.messaging().sendToTopic('Events',message)
         try {
             const s_query = `SELECT id, title, text, lower(validity)::text AS low_val, upper(validity)::text AS upper_val
             FROM news WHERE id = ${rows[0].id}`
